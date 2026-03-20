@@ -50,7 +50,7 @@ static const char* getRandomFont() {
 CrashPickerLayer* CrashPickerLayer::create() {
     s_pickedTheFont = false;
     auto ret = new CrashPickerLayer();
-    if (ret->initAnchored(360, 240, fmt::format("Mega Crash v{}", util::randInt(-1, 69)), "GJ_square01.png")) {
+    if (ret->init(fmt::format("Mega Crash v{}", util::randInt(-1, 69)))) {
         ret->autorelease();
         return ret;
     }
@@ -58,7 +58,8 @@ CrashPickerLayer* CrashPickerLayer::create() {
     return nullptr;
 }
 
-bool CrashPickerLayer::setup(const std::string& title) {
+bool CrashPickerLayer::init(const std::string& title) {
+    if (!Popup::init(360, 240, "GJ_square01.png")) return false;
     auto menu = cocos2d::CCMenu::create();
     this->addChild(menu);
 
